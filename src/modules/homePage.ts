@@ -15,7 +15,8 @@ export class HomePage {
     private readonly firebase: Firebase = new Firebase();
     // private readonly allUsers = this.firebase.getAllUsers();
     // private readonly profilePage: ProfilePage = new ProfilePage();
-    constructor() {}
+    constructor() { }
+
     async homePage() {
         // localStorage.removeItem('dontRepeatHome');
         this.gui.createHomePage();
@@ -36,23 +37,16 @@ export class HomePage {
             document.getElementById('listOfAllUsers')!.append(userForTheList);
         })
         //För statusuppdateringar
-        const userStatusUpdateForm = document.getElementById('userStatusUpdateForm')!;
-        userStatusUpdateForm.addEventListener('submit', async (event) => {
-            console.trace();
-            event.preventDefault();
-            //Texten användaren skrev skickas med till statusUpdate
-            let statusUpdateText = (<HTMLTextAreaElement>document.getElementById('userStatusUpdate')!).value;
-            await this.statusUpdate(statusUpdateText).then(async() => { 
-                await this.allUsersPosts();
-                // console.log('nu ska alla posts uppdateras')
-            })
-        })
+
+
         //För att logga ut sin användare
         const logOutBtn = document.getElementById('logOutBtn')!;
         logOutBtn.addEventListener('click', () => {
             localStorage.clear();
             window.location.href = './index.html';
         });
+
+
         // För att ta bort sin användare
         const deleteAccountBtn = document.getElementById('deleteAccountBtn')!;
         deleteAccountBtn.addEventListener('click', async () => {
@@ -76,6 +70,20 @@ export class HomePage {
             }
         })
     }
+
+    async addPost() {
+        const userStatusUpdateForm = document.getElementById('userStatusUpdateForm')!;
+        userStatusUpdateForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            //Texten användaren skrev skickas med till statusUpdate
+            let statusUpdateText = (<HTMLTextAreaElement>document.getElementById('userStatusUpdate')!).value;
+            await this.statusUpdate(statusUpdateText).then(async () => {
+                await this.allUsersPosts();
+                // console.log('nu ska alla posts uppdateras')
+            })
+        })
+    }
+
     async statusUpdate(statusUpdate: string) {
         console.trace();
         const allUsers = await this.firebase.getAllUsers();
@@ -85,17 +93,21 @@ export class HomePage {
         if (currentUser !== undefined) {
             const userIndex: number = allUsers.indexOf(currentUser);
             const timestamp = new Date().toLocaleString();
+            const id = new Date().toLocaleString();
             // console.log(userIndex, timestamp);
-            await this.firebase.updateUserPosts(statusUpdate, timestamp, userIndex);
+            await this.firebase.updateUserPosts(statusUpdate, timestamp, userIndex, id);
             // await this.allUsersPosts();
         }
         // Texten användaren skrev tas bort
         (<HTMLTextAreaElement>document.getElementById('userStatusUpdate')!).value = '';
     }
+
+
     async allUsersPosts() {
         const allUsers = await this.firebase.getAllUsers();
         document.getElementById('everyStatusUpdateContainer')!.innerHTML = "";
         let allPosts: PostType[] = [];
+
         allUsers.forEach((storedUser: UserType) => {
             if (storedUser.posts !== undefined) {
                 const arrayOfPosts = Object.values(storedUser.posts);

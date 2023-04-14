@@ -1,9 +1,12 @@
 import { User } from "./modules/user";
 import { Gui } from "./modules/gui";
+import { HomePage } from "./modules/homePage";
 
 const GuiFor = new Gui();
 GuiFor.createLogin();
 const user = new User();
+const homePage = new HomePage();
+
 
 // För att skapa en användare
 const createUserForm = document.getElementById('createUserForm')!;
@@ -29,6 +32,9 @@ backToHomeBtn.addEventListener('click', () => {
     // localStorage.setItem('dontRepeatHome', 'true');
     // console.log(localStorage.getItem('dontRepeatHome'), 'nu har vi tryckt på hem');
 });
+
+
+homePage.addPost();
 
 // if (localStorage.getItem('username') != null) {
 //     homePage.homePage();

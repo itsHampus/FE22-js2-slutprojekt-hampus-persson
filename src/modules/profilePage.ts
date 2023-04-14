@@ -2,6 +2,7 @@ import { Gui } from "./gui";
 import { PostType } from "./homePage";
 import { Firebase } from "./firebase";
 import { UserType } from "./user";
+
 export class ProfilePage{
     private readonly gui: Gui = new Gui();
     private readonly firebase: Firebase = new Firebase();
