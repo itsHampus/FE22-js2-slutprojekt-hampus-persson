@@ -23,7 +23,7 @@ loginForm.addEventListener('submit', (event) => {
 
 //Tillbaks till Home
 const backToHomeBtn = document.getElementById('backToHomeBtn')!;
-backToHomeBtn.addEventListener('click', () => { 
+backToHomeBtn.addEventListener('click', () => {
     console.log('Back to Home');
     user.goToHomeOrProfile(true);
     document.getElementById('profileStatusContainer')!.innerHTML = '';
@@ -35,7 +35,7 @@ backToHomeBtn.addEventListener('click', () => {
 
 
 homePage.addPost();
-
+homePage.delete();
 // if (localStorage.getItem('username') != null) {
 //     homePage.homePage();
 //     console.log('user logged in händer');

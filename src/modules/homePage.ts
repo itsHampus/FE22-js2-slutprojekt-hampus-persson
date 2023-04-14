@@ -48,6 +48,9 @@ export class HomePage {
 
 
         // För att ta bort sin användare
+    }
+
+    async delete(){
         const deleteAccountBtn = document.getElementById('deleteAccountBtn')!;
         deleteAccountBtn.addEventListener('click', async () => {
             let confirmedChoise = confirm('Are you sure you want to delete your account?');
