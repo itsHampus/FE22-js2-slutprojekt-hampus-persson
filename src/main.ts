@@ -1,9 +1,12 @@
 import { User } from "./modules/user";
 import { Gui } from "./modules/gui";
+import { HomePage } from "./modules/homePage";
 
 const GuiFor = new Gui();
 GuiFor.createLogin();
 const user = new User();
+const homePage = new HomePage();
+
 
 // För att skapa en användare
 const createUserForm = document.getElementById('createUserForm')!;
@@ -20,7 +23,7 @@ loginForm.addEventListener('submit', (event) => {
 
 //Tillbaks till Home
 const backToHomeBtn = document.getElementById('backToHomeBtn')!;
-backToHomeBtn.addEventListener('click', () => { 
+backToHomeBtn.addEventListener('click', () => {
     console.log('Back to Home');
     user.goToHomeOrProfile(true);
     document.getElementById('profileStatusContainer')!.innerHTML = '';
@@ -30,6 +33,9 @@ backToHomeBtn.addEventListener('click', () => {
     // console.log(localStorage.getItem('dontRepeatHome'), 'nu har vi tryckt på hem');
 });
 
+
+homePage.addPost();
+homePage.delete();
 // if (localStorage.getItem('username') != null) {
 //     homePage.homePage();
 //     console.log('user logged in händer');

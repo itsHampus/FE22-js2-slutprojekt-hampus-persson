@@ -99,8 +99,8 @@ export class User {
         })
         return checkUser;
     }
+
     goToHomeOrProfile(trueOrFalse: boolean, username?: string): any {
-        console.trace();
         if (trueOrFalse == true) {
             // this.homePage = new HomePage();
             this.homePage.homePage().then(() => {
@@ -114,6 +114,7 @@ export class User {
             return
         }
     }
+
     addEventListenersOnListOfUsers() {
         const listOfAllUsers: NodeListOf<HTMLLIElement> = document.querySelectorAll('#listOfAllUsers li')!;
         listOfAllUsers.forEach((user) => {
