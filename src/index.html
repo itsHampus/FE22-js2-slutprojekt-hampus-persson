@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styling.css">
     <script src="main.ts" type="module"></script>
-    <title>Document</title>
+    <title>Social Media App</title>
 </head>
 
 <body>
@@ -16,19 +16,21 @@
             <label for="username">Username:</label>
             <input type="text" name="username" id="username">
             <label for="password">Password:</label>
-            <input type="text" name="password" id="password">
+            <input type="password" name="password" id="password">
             <button>Login</button>
         </form>
+
         <h5>Create user</h5>
+
     </div>
     <div id="createUserContainer">
         <form action="" id="createUserForm">
             <label for="createUsername">Create username</label>
             <input type="text" name="username" id="createUsername" required>
             <label for="createPassword">Create password</label>
-            <input type="text" name="createPassword" id="createPassword" required>
+            <input type="password" name="createPassword" id="createPassword" required>
             <label for="verifyPassword">Verify password</label>
-            <input type="text" name="verifyPassword" id="verifyPassword" required>
+            <input type="password" name="verifyPassword" id="verifyPassword" required>
             <label for="selectPicture">Select icon</label>
             <select name="selectPicture" id="selectPicture">
                 <option value="animal-bull-bulls-svgrepo-com.svg">Bull</option>
@@ -47,12 +49,8 @@
             <div class="dropdown">
                 <button class="dropBtn">Options</button>
                 <div id="dropdownMenu" class="dropdownMenu">
-                    <!-- <a href="#">Log Out</a>
-                    <a href="#">Delete Account</a> -->
                     <button id="logOutBtn">Log out</button>
                     <button id="deleteAccountBtn">Delete Account</button>
-                    <!-- <option value="logOut">Log Out</option>
-                    <option value="removeAccount">Remove Account</option> -->
                 </div>
             </div>
         </div>
@@ -62,11 +60,11 @@
                 <button>Update</button>
             </form>
         </div>
-        <div id="everyStatusUpdateContainer"></div>
         <div id="listOfAllUsersContainer">
             <label for="listOfAllUsers">List of all users:</label>
-            <ol name="listOfAllUsers" id="listOfAllUsers"></ol>
+            <ul name="listOfAllUsers" id="listOfAllUsers"></ul>
         </div>
+        <div id="everyStatusUpdateContainer"></div>
     </div>
 
     <div id="profilePageContainer">

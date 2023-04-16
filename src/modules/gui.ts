@@ -19,25 +19,25 @@ export class Gui {
         })
     }
     public createLogin() {
-        this.loginContainer.style.display = 'block';
+        this.loginContainer.style.display = 'flex';
         this.createUserContainer.style.display = 'none';
         this.homePageContainer.style.display = 'none';
         this.profilePageContainer.style.display = 'none';
     }
     public createUser() {
-        this.createUserContainer.style.display = 'block';
+        this.createUserContainer.style.display = 'flex';
         this.loginContainer.style.display = 'none';
         this.homePageContainer.style.display = 'none';
         this.profilePageContainer.style.display = 'none';
     }
     public createHomePage() {
-        this.homePageContainer.style.display = 'block';
+        this.homePageContainer.style.display = 'flex';
         this.createUserContainer.style.display = 'none';
         this.loginContainer.style.display = 'none';
         this.profilePageContainer.style.display = 'none';
     }
     public createProfilePage() {
-        this.profilePageContainer.style.display = 'block';
+        this.profilePageContainer.style.display = 'flex';
         this.homePageContainer.style.display = 'none';
         this.createUserContainer.style.display = 'none';
         this.loginContainer.style.display = 'none';
@@ -66,6 +66,20 @@ export class Gui {
         else if (imgUrl == 'animal-duck-ducks-svgrepo-com.svg' && homePageOrProfilePage === false) {
             const profilePictureUrl = new URL('../images/animal-duck-ducks-svgrepo-com.svg', import.meta.url);
             this.profilePicture.src = profilePictureUrl.href;
+        }
+    }
+    returnPictureUrl(imgUrl: string){
+        if(imgUrl == 'animal-leao-lion-svgrepo-com.svg'){
+            const pictureUrl = new URL('../images/animal-leao-lion-svgrepo-com.svg', import.meta.url);
+            return pictureUrl
+        }
+        else if(imgUrl == 'animal-bull-bulls-svgrepo-com.svg'){
+            const pictureUrl = new URL('../images/animal-bull-bulls-svgrepo-com.svg', import.meta.url);
+            return pictureUrl
+        }
+        else if(imgUrl == 'animal-duck-ducks-svgrepo-com.svg'){
+            const pictureUrl = new URL('../images/animal-duck-ducks-svgrepo-com.svg', import.meta.url);
+            return pictureUrl
         }
     }
 }

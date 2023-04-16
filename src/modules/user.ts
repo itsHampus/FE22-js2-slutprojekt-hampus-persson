@@ -18,21 +18,13 @@ export type UserType = {
 
 export class User {
     private readonly firebase: Firebase = new Firebase();
-    private homePage: HomePage= new HomePage();
-    private profilePage: ProfilePage= new ProfilePage();
+    private homePage: HomePage = new HomePage();
+    private profilePage: ProfilePage = new ProfilePage();
     constructor(
     ) {
-        if (localStorage.getItem('username') != null) {//&& localStorage.getItem('dontRepeatHome') == null) {
-            // console.log(localStorage.getItem('dontRepeatHome'), 'Nu är vi i constructorn på user');
-            this.goToHomeOrProfile(true)//.then(() => {
-            //     this.addEventListenersOnListOfUsers();
-            // })
-            // console.log('user logged in händer');
-            // profilePage(localStorage.getItem('username')!);
+        if (localStorage.getItem('username') != null) {
+            this.goToHomeOrProfile(true)
         }
-        // this.homePage = new HomePage();
-        // this.profilePage = new ProfilePage();
-
     }
     async createUser() {
         const createUsername: string = (<HTMLInputElement>document.getElementById('createUsername'))!.value;
@@ -55,17 +47,7 @@ export class User {
                 await this.firebase.CreateUser(user, indexForUser);
             }
             localStorage.setItem('username', user.username);
-            this.goToHomeOrProfile(true)/*.then(() => {
-                // Lägger till eventListener efter home har körts och alla användare har lagts till i listan
-                this.addEventListenersOnListOfUsers();
-                // const listOfAllUsers: NodeListOf<HTMLLIElement> = document.querySelectorAll('#listOfAllUsers li')!;
-                // listOfAllUsers.forEach((user) => {
-                //     user.addEventListener('click', () => {
-                //         // console.log(user)
-                //         this.goToHomeOrProfile(false, user.innerText);
-                //     })
-                // });
-            })*/
+            this.goToHomeOrProfile(true)
         } else {
             alert('Passwords do not match');
         }
@@ -88,9 +70,7 @@ export class User {
                 if (storedUser.password === password) {
                     localStorage.setItem('username', storedUser.username)
                     checkUser = true;
-                    this.goToHomeOrProfile(true)/*.then(() => {
-                        this.addEventListenersOnListOfUsers();
-                    })*/
+                    this.goToHomeOrProfile(true)
                 }
                 else {
                     alert("Wrong password");
@@ -99,30 +79,20 @@ export class User {
         })
         return checkUser;
     }
-    goToHomeOrProfile(trueOrFalse: boolean, username?: string): any {
-        console.trace();
+    goToHomeOrProfile(trueOrFalse: boolean, username?: string): void {
         if (trueOrFalse == true) {
-            // this.homePage = new HomePage();
             this.homePage.homePage().then(() => {
                 this.addEventListenersOnListOfUsers();
             })
-            return
         }
         else {
-            // this.profilePage = new ProfilePage();
             this.profilePage.profilePage(username!);
-            return
         }
     }
     addEventListenersOnListOfUsers() {
         const listOfAllUsers: NodeListOf<HTMLLIElement> = document.querySelectorAll('#listOfAllUsers li')!;
         listOfAllUsers.forEach((user) => {
-            user.addEventListener('click', () => {
-                // console.log(user)
-                // this.profilePage = new ProfilePage();
-                // this.profilePage.profilePage(user.innerText);
-                this.goToHomeOrProfile(false, user.innerText);
-            })
+            user.addEventListener('click', () => { this.goToHomeOrProfile(false, user.innerText); })
         });
     }
 }

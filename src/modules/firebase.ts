@@ -1,4 +1,3 @@
-import { User } from "./user";
 import { UserType } from "./user";
 export class Firebase{
     constructor(){}
@@ -29,8 +28,6 @@ export class Firebase{
             }
         }
         const response = await fetch(url, init);
-        // const data = await response.json();
-        // console.log('Nu har statusen uppdaterats i firebase');
     }
     async deleteUserPost(postId: string, index: Number):Promise<void>{
         const url = `https://slutprojekt-socialmedia-default-rtdb.europe-west1.firebasedatabase.app/${index}/posts/${postId}.json`;
@@ -42,7 +39,7 @@ export class Firebase{
         }
         const response = await fetch(url, init);
     }
-    async deleteUser():Promise<void>{
+    async deleteUserFromFirebase():Promise<void>{
         const url = `https://slutprojekt-socialmedia-default-rtdb.europe-west1.firebasedatabase.app/.json`;
         const init = {
             method: 'DELETE',

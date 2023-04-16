@@ -24,6 +24,7 @@ export class ProfilePage{
                     arrayOfPosts.forEach(({ post, timestamp }, indexForThePost: number) => {
                         const postWithTimestamp: PostType = {
                             username: storedUser.username,
+                            picture: storedUser.profilePicture,
                             p: post,
                             t: timestamp
                         }
@@ -39,23 +40,23 @@ export class ProfilePage{
                     noStatusUpdate.innerText = 'No posts yet';
                     document.getElementById('profileStatusContainer')!.append(noStatusUpdate);
                 }
-    
             }
         })
         allPosts.sort((a, b) => new Date(b.t).getTime() - new Date(a.t).getTime());
         arrayOfIndexesForPosts.reverse();
         allPosts.forEach((storedPost: PostType, indexForThePost: number) => {
-            // console.log(storedPost);
             const statusContainer = document.createElement('div');
             statusContainer.id = 'containerForTheProfilePost';
             const statusUsername = document.createElement('h5');
             statusUsername.innerText = storedPost.username;
+            const profilePicture = document.createElement('img');
+            const pictureSrc = this.gui.returnPictureUrl(storedPost.picture)!;
+            profilePicture.src = pictureSrc.href;
             const statusText = document.createElement('p');
             statusText.innerText = storedPost.p;
             const statusTimestamp = document.createElement('p');
             statusTimestamp.innerText = storedPost.t;
     
-            // console.log(arrayOfIndexesForPosts);
             if (storedPost.username === localStorage.getItem('username')) {
                 const deletePostBtn = document.createElement('button');
                 deletePostBtn.innerText = 'Delete post';
@@ -75,19 +76,11 @@ export class ProfilePage{
                     }
                 });
     
-                statusContainer.append(statusUsername, statusText, statusTimestamp, deletePostBtn);
+                statusContainer.append(statusUsername, profilePicture,statusText, statusTimestamp, deletePostBtn);
             } else {
-                statusContainer.append(statusUsername, statusText, statusTimestamp);
+                statusContainer.append(statusUsername, profilePicture, statusText, statusTimestamp);
             }
             document.getElementById('profileStatusContainer')!.append(statusContainer);
         })
-    
-        // //Tillbaks till Home
-        // const backToHomeBtn = document.getElementById('backToHomeBtn')!;
-        // backToHomeBtn.addEventListener('click', () => {
-        //     // GuiFor.createHomePage();
-        //     this.homePage.homePage();
-        //     document.getElementById('profileStatusContainer')!.innerHTML = '';
-        // });
     }
 }
